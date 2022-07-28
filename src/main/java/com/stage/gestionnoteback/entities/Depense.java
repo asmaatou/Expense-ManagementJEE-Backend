@@ -20,8 +20,8 @@ public class Depense {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date dateDepense;
-    private String dlient;
-    private String droduit_Projet;
+    private String client;
+    private String produit_Projet;
     @Enumerated(EnumType.STRING)
     private InventionType typeI;
     @Enumerated(EnumType.STRING)
