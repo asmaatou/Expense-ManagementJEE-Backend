@@ -18,7 +18,5 @@ public class Admin {
     private String Fname;
     private String Lname;
     private String email;
-    private String hhhhh;
-    private String Hello;
 
 }
