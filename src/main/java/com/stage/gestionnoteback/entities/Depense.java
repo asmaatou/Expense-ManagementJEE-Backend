@@ -28,8 +28,6 @@ public class Depense {
     private InventionType typeI;
     @Enumerated(EnumType.STRING)
     private DepenseType typeD;
-    @Column(nullable = true, length = 64)
-    private String photo;
     private Double montant;
     @Enumerated(EnumType.STRING)
     @Value("${Depense.status:En cours}")

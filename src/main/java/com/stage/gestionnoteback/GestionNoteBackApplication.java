@@ -1,12 +1,17 @@
 package com.stage.gestionnoteback;
 
 import com.stage.gestionnoteback.entities.Employe;
+import com.stage.gestionnoteback.entities.Personne;
+import com.stage.gestionnoteback.enums.Roles;
 import com.stage.gestionnoteback.repositories.DepenseRepository;
 import com.stage.gestionnoteback.repositories.EmployeRepository;
+import com.stage.gestionnoteback.repositories.PersonneRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
+import java.util.UUID;
 import java.util.stream.Stream;
 
 @SpringBootApplication
@@ -16,14 +21,17 @@ public class GestionNoteBackApplication {
 		SpringApplication.run(GestionNoteBackApplication.class, args);
 	}
 
-	CommandLineRunner start(EmployeRepository employeRepository, DepenseRepository depenseRepository){
+	@Bean
+	CommandLineRunner start(PersonneRepository personneRepository, DepenseRepository depenseRepository){
 		return args -> {
-			Stream.of("Amine","Yassine","Hiba").forEach(name->{
-				Employe employe = new Employe();
-				employe.setFname(name);
-				employe.setEmail(name+"@gmail.com");
+			Stream.of("Anass","Nada","Ayoub").forEach(name->{
+                Personne personne= new Personne();
+				personne.setUserName(name+UUID.randomUUID());
+				personne.setFullName(name);
+				personne.setEmail(name+"@gmail.com");
+				personne.setRole(Roles.valueOf("Admin"));
+                personneRepository.save(personne);
 			});
-
 		};
 	}
 
