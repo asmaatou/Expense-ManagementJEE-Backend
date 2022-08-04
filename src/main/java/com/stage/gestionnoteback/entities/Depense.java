@@ -3,7 +3,6 @@ package com.stage.gestionnoteback.entities;
 import com.stage.gestionnoteback.enums.DepenseType;
 import com.stage.gestionnoteback.enums.InventionType;
 import com.stage.gestionnoteback.enums.StatusType;
-import javafx.scene.image.Image;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,13 +10,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.awt.*;
 import java.util.Date;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Depense {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyyy")

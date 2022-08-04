@@ -2,10 +2,14 @@ package com.stage.gestionnoteback;
 
 import com.stage.gestionnoteback.entities.Employe;
 import com.stage.gestionnoteback.entities.Personne;
+import com.stage.gestionnoteback.enums.DepenseType;
+import com.stage.gestionnoteback.enums.InventionType;
 import com.stage.gestionnoteback.enums.Roles;
+import com.stage.gestionnoteback.exceptions.EmployeNotFoundException;
 import com.stage.gestionnoteback.repositories.DepenseRepository;
 import com.stage.gestionnoteback.repositories.EmployeRepository;
 import com.stage.gestionnoteback.repositories.PersonneRepository;
+import com.stage.gestionnoteback.services.GestionNoteService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,8 +24,26 @@ public class GestionNoteBackApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GestionNoteBackApplication.class, args);
 	}
-
 	@Bean
+	CommandLineRunner commandLineRunner(GestionNoteService gestionNoteService){
+		return args -> {
+			Stream.of("Anass","Nada","Ayoub").forEach(name->{
+				Employe employe= new Employe();
+				employe.setUserName(name+UUID.randomUUID());
+				employe.setFullName(name);
+				employe.setEmail(name+"@gmail.com");
+				gestionNoteService.saveEmploye(employe);
+			});
+			gestionNoteService.listEmployes().forEach(personne -> {
+				try {
+					gestionNoteService.saveDepense("Dehbi","oracle", InventionType.Installation, DepenseType.TAXI,35.5, personne.getId());
+				} catch (EmployeNotFoundException e) {
+					e.printStackTrace();
+				}
+			});
+		};
+	}
+	//@Bean
 	CommandLineRunner start(PersonneRepository personneRepository, DepenseRepository depenseRepository){
 		return args -> {
 			Stream.of("Anass","Nada","Ayoub").forEach(name->{
