@@ -2,7 +2,6 @@ package com.stage.gestionnoteback.entities;
 
 import com.stage.gestionnoteback.enums.DepenseType;
 import com.stage.gestionnoteback.enums.InventionType;
-import com.stage.gestionnoteback.enums.StatusType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,9 +27,7 @@ public class Depense {
     @Enumerated(EnumType.STRING)
     private DepenseType typeD;
     private Double montant;
-    @Enumerated(EnumType.STRING)
-    @Value("${Depense.status:En cours}")
-    private StatusType status;
+    private String status = "En cours";
     @ManyToOne
     private Employe employe;
 

@@ -13,11 +13,16 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @Slf4j
+@CrossOrigin("*")
 public class EmployeRestController {
     private GestionNoteService gestionNoteService;
     @GetMapping("/employes")
     public List<EmployeDTO> employes(){
         return gestionNoteService.listEmployes();
+    }
+    @GetMapping("/employes/search")
+    public  List<EmployeDTO> searchEmployes(@RequestParam(name = "keyword",defaultValue = "")String keyword){
+        return gestionNoteService.searchEmployes("%"+keyword+"%");
     }
     @GetMapping("/employes/{id}")
     public EmployeDTO getEmploye(@PathVariable(name = "id") Long employeId) throws EmployeNotFoundException {
