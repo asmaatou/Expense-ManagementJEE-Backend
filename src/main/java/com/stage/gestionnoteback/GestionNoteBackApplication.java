@@ -1,5 +1,6 @@
 package com.stage.gestionnoteback;
 
+import com.stage.gestionnoteback.dtos.EmployeDTO;
 import com.stage.gestionnoteback.entities.Employe;
 import com.stage.gestionnoteback.entities.Personne;
 import com.stage.gestionnoteback.enums.DepenseType;
@@ -28,7 +29,7 @@ public class GestionNoteBackApplication {
 	CommandLineRunner commandLineRunner(GestionNoteService gestionNoteService){
 		return args -> {
 			Stream.of("Anass","Nada","Ayoub").forEach(name->{
-				Employe employe= new Employe();
+				EmployeDTO employe= new EmployeDTO();
 				employe.setUserName(name+UUID.randomUUID());
 				employe.setFullName(name);
 				employe.setEmail(name+"@gmail.com");
