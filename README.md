@@ -177,20 +177,3 @@ Il existe 5 API :
 – /api/dep/getDeniedDepense pour affichage de la liste des dépenses dont le status est {Denied } de tous les utilisateurs qui ont comme rôle {ROLE_EMPLOYE} 
 – /api/dep/acceptdep pour accepter les dépenses ajouter par les utilisateurs qui ont comme rôle {ROLE_EMPLOYE}
 – /api/dep/denydep pour refuser les dépenses ajouter par les utilisateurs qui ont comme rôle {ROLE_EMPLOYE}
-Création de la classe DepenseServiceImpl : 
-Dans cette classe on implémentera les 9 fonctions de l’interface DepenseService : 
- 
-Quelques annotations JPA utilisées : 
-
-@Entity : Indique que la classe est persistante est correspond à une table dans la base de données
- @Id : Associer un champ de la table à la propriété en tant que clé primaire
- @Data : Générer constructeur sans paramètre 
-@Autowired : Injection Des Dépendances
- @NoArgsConstroctor : Pour ne pas générer constructeur 
-@AllArgsConstructor : Générer constructeur avec paramètre
- @Transactional : Toutes Les Méthodes Sont Transactionnelles 
-@Bean : Pour Exécuter Les Méthodes Au Démarrage 
-@Slf4j : Loger Les Informations 
-@GeneratedValue : Demander la génération automatique de la clé primaire au besoin 
-@ManyToMany : Pour décrire une association plusieurs à plusieurs
-@JoinedColumn : Pour décrire une clé étrangère dans une table ……. 
