@@ -2,6 +2,7 @@ package com.stage.gestionnoteback.controllers;
 
 
 import com.stage.gestionnoteback.dtos.DepenseDTO;
+import com.stage.gestionnoteback.dtos.UserDTO;
 import com.stage.gestionnoteback.models.Depense;
 import com.stage.gestionnoteback.models.User;
 import com.stage.gestionnoteback.repository.DepenseRepository;
@@ -27,13 +28,6 @@ public class DepenseController {
     @Autowired
     private DepenseRepository depenseRepository;
 
-
-    /*@GetMapping("/depense")
-    @PreAuthorize("hasRole('EMPLOYE')")
-    public List<DepenseDTO> Listdepense(){
-        return  depenseService.listDepenses();
-    }*/
-
     @PostMapping("/depense")
     @PreAuthorize("hasRole('EMPLOYE')")
     public DepenseDTO saveDepense(@RequestBody DepenseDTO depenseDTO){
@@ -56,18 +50,14 @@ public class DepenseController {
     public List<Depense> Listdepense(@RequestParam(name = "keyword") String keyword){
         return  depenseService.listDepense("%"+keyword+"%");
     }
-
-
-
+    @GetMapping("/depense/search")
+    @PreAuthorize("hasRole('EMPLOYE')")
+    public List<DepenseDTO> searchDepenses(@RequestParam(name = "keyword",defaultValue = "")String keyword){
+        return depenseService.searchDepense("%"+keyword+"%");
+    }
 
     //////////////////////////////////////////////////////////////////////////////////
 
-
-    @GetMapping("/depenses")
-    @PreAuthorize("hasRole('MANAGER')")
-    public List<DepenseDTO> Listdepense2(){
-        return  depenseService.listDepenses();
-    }
 
     @PostMapping("/acceptdep/{id}")
     @PreAuthorize("hasRole('MANAGER')")

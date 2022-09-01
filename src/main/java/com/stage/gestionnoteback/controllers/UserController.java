@@ -21,10 +21,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private UserService userService;
-
     @GetMapping("/getEmploye")
     @PreAuthorize("hasRole('ADMIN')")
     public List<User> getEmploye(){

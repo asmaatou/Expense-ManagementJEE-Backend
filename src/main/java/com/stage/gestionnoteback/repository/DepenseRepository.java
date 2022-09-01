@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -15,5 +16,8 @@ public interface DepenseRepository extends JpaRepository<Depense, Long> {
     List<Depense> findDepenseByStatus(String status);
     @Query("SELECT d from Depense d where d.username like :kw")
     List<Depense> findDepenseByUsername(@Param("kw") String username);
+
+    @Query("select d from Depense d where d.status like :kw")
+    List<Depense> searchDepense(@Param("kw") String status);
 
 }

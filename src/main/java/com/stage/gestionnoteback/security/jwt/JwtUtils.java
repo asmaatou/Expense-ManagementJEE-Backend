@@ -14,13 +14,10 @@ import java.util.Date;
 @Component
 public class JwtUtils {
   private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
-
-  @Value("${bezkoder.app.jwtSecret}")
+  @Value("${gestionoteback.app.jwtSecret}")
   private String jwtSecret;
-
-  @Value("${bezkoder.app.jwtExpirationMs}")
+  @Value("${gestionoteback.app.jwtExpirationMs}")
   private int jwtExpirationMs;
-
   public String generateJwtToken(Authentication authentication) {
 
     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
@@ -32,11 +29,9 @@ public class JwtUtils {
         .signWith(SignatureAlgorithm.HS512, jwtSecret)
         .compact();
   }
-
   public String getUserNameFromJwtToken(String token) {
     return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
   }
-
   public boolean validateJwtToken(String authToken) {
     try {
       Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

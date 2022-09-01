@@ -32,19 +32,14 @@ import java.util.stream.Collectors;
 public class AuthController {
   @Autowired
   AuthenticationManager authenticationManager;
-
   @Autowired
   UserRepository userRepository;
-
   @Autowired
   RoleRepository roleRepository;
-
   @Autowired
   PasswordEncoder encoder;
-
   @Autowired
   JwtUtils jwtUtils;
-
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -65,7 +60,6 @@ public class AuthController {
                          userDetails.getEmail(), 
                          roles));
   }
-
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -73,14 +67,11 @@ public class AuthController {
           .badRequest()
           .body(new MessageResponse("Error: Username is already taken!"));
     }
-
-
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
       return ResponseEntity
           .badRequest()
           .body(new MessageResponse("Error: Email is already in use!"));
     }
-
     // Create new user's account
     User user = new User(signUpRequest.getUsername(),
                signUpRequest.getEmail(),
@@ -115,10 +106,8 @@ public class AuthController {
         }
       });
     }
-
     user.setRoles(roles);
     userRepository.save(user);
-
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
 }

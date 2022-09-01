@@ -22,7 +22,13 @@ public class DepenseServiceImpl implements DepenseService{
     private GestionNoteMapperImpl dtoMapper;
     private DepenseRepository depenseRepository;
 
-
+    @Override
+    public List<DepenseDTO> searchDepense(String keyword){
+        List<Depense> depenses=depenseRepository.searchDepense(keyword);
+        List<DepenseDTO> userDTOS=depenses.stream().map(depense -> dtoMapper.fromDepense(depense)).collect(Collectors
+                .toList());
+        return  userDTOS;
+    }
 
     @Override
     public DepenseDTO saveDepense(DepenseDTO depenseDTO) {
